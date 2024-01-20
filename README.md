@@ -1,4 +1,4 @@
-# AES Encryption and Steganography Project
+# AES Encryption and Steganography Web Application
 
 
 ## Overview
@@ -17,7 +17,7 @@ This project combines AES encryption with steganography techniques to hide encry
 
 To run this project, follow these steps:
 
-1. Clone the repository to your local machine: ```git clone https://github.com/Ahsan-20/Aes_Steganography.git```
+1. Clone the repository to your local machine: ```https://github.com/Ahsan-20/AES-Encryption-and-Steganography-Web-Application.git```
    
 2. Ensure you have Python 3.x installed.
    
