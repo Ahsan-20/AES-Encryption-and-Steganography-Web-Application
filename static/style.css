@@ -1,0 +1,122 @@
+body {
+    background-color: #000;
+    font-family: 'Courier New', monospace;
+    color: #00FF00;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.container {
+    width: auto; /* Adjust width */
+    max-width: 350px;
+    margin: 0 auto; /* Center the container */
+    padding: 20px;
+    border: 2px solid #00FF00;
+    border-radius: 10px;
+    background-color: #000;
+    opacity: 0.9;
+    box-sizing: border-box; /* Include padding in the width calculation */
+}
+
+input[type="file"], input[type="password"], input[type="text"], button {
+    width: 100%; /* Full width */
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: block;
+    border: none;
+    background-color: #333;
+    color: #00FF00;
+    border-radius: 5px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    box-sizing: border-box; /* Include padding in the width calculation */
+}
+
+button {
+    background-color: #04AA6D;
+    color: #fff;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #00FF00;
+}
+
+/* Media Queries for screens up to 600px */
+@media (max-width: 600px) {
+    .container {
+        max-width: 100%; /* Full width on smaller screens */
+        padding: 15px; /* Reduced padding */
+    }
+
+    input[type="file"], input[type="password"], input[type="text"], button {
+        padding: 12px 20px; /* Keep the same padding for consistency */
+    }
+}
+
+/* Media Queries for Large Mobile Screens (up to 768px) */
+@media (max-width: 768px) {
+    .container {
+        max-width: 95%; /* Wider container for better space utilization */
+        padding: 15px; /* Slightly reduced padding */
+    }
+
+    input[type="file"], input[type="password"], input[type="text"], button {
+        padding: 10px 15px;
+        font-size: 16px; /* Slightly larger font for better readability */
+    }
+}
+
+/* Media Queries for Small Mobile Screens (up to 480px) */
+@media (max-width: 480px) {
+    .container {
+        max-width: 100%; /* Full width for small screens */
+    }
+
+    input[type="file"], input[type="password"], input[type="text"], button {
+        padding: 8px 10px; /* Reduced padding for small screens */
+        font-size: 14px; /* Adjust font size as needed */
+    }
+}
+
+/* Media Queries for Very Small Devices (up to 320px) */
+@media (max-width: 320px) {
+    input[type="file"], input[type="password"], input[type="text"], button {
+        padding: 6px 8px; /* Minimal padding for very small screens */
+        font-size: 12px; /* Smaller font size for tiny screens */
+    }
+}
+
+@media (max-width: 1080px) {
+    .container {
+        /* Your styles for 6.7-inch screens */
+        max-width: 90%; /* Adjust as needed */
+        padding: 15px; /* Adjust padding */
+    }
+
+    input[type="file"], input[type="password"], input[type="text"], button {
+        /* Your styles for input fields and buttons on 6.7-inch screens */
+        padding: 10px 15px;
+        font-size: 16px; /* Adjust font size */
+    }
+}
+
+@media (max-width: 750px) {
+    .container {
+        /* Your styles for 4.7-inch screens */
+        max-width: 90%; /* Adjust as needed */
+        padding: 10px; /* Adjust padding */
+    }
+
+    input[type="file"], input[type="password"], input[type="text"], button {
+        /* Your styles for input fields and buttons on 4.7-inch screens */
+        padding: 8px 12px;
+        font-size: 14px; /* Adjust font size */
+    }
+}

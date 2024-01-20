@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image Decryption</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        /* Custom CSS for the "Encryption" button */
+        .encryption-button {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            text-decoration: none;
+            color: #00FF00;
+            padding: 10px 20px; /* Adjust padding to control the size of the button */
+            background-color: #000;
+            border: 2px solid #00FF00;
+            border-radius: 5px;
+            transform: rotate(0deg); /* No rotation for this button */
+            transition: transform 0.3s ease; /* Add a hover effect */
+        }
+
+        /* Hover effect: Scale the button slightly on hover */
+        .encryption-button:hover {
+            transform: scale(1.1) rotate(180deg); /* Rotate it to the right */
+        }
+
+        /* Custom CSS for the decrypted message text box (initially hidden) */
+        .decrypted-message-box {
+            display: none; /* Initially hidden */
+            width: 100%;
+            max-width: 290px; /* Adjust the width as needed */
+            padding: 10px;
+            margin-top: 20px;
+            border: 2px solid #00FF00;
+            border-radius: 5px;
+            background-color: #000;
+            color: #00FF00;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+        }
+
+        /* Style for the loading message */
+        .loading-message {
+            display: none; /* Initially hidden */
+            color: #00FF00;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        /* Style for the loading spinner */
+        .loading-spinner {
+            display: none; /* Initially hidden */
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid #00FF00;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 2s linear infinite;
+        }
+
+        /* Keyframe animation for the loading spinner */
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Style for the circular reset button */
+        .reset-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #00FF00;
+            color: #000;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .reset-button:hover {
+            transform: scale(1.1) rotate(180deg); /* Rotate it to the right */
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Image Decryption</h1>
+        <form action="/decrypt_message" method="post" enctype="multipart/form-data" id="decryption-form">
+            
+            <input type="file" id="encryptedImageUpload" name="image" accept="image/png" required>
+
+            <input type="password" id="decryptKey" name="key" placeholder="Enter Key" required>
+            <button type="submit" id="decrypt-button">Decrypt</button>
+            <!-- Loading message and spinner -->
+            <div class="loading-message" id="loading-message">Decrypting...</div>
+            <div class="loading-spinner" id="loading-spinner"></div>
+        </form>
+        <!-- Decrypted message text box (initially hidden) -->
+        <textarea class="decrypted-message-box" id="decryptedMessage" readonly></textarea>
+        <!-- Circular reset button -->
+        <div class="reset-button" id="reset-button">&#8634;</div>
+    </div>
+    <!-- Arrow-like "Encryption" button positioned at the top-left corner -->
+    <a href="/" class="encryption-button">Encryption →</a>
+
+    <script>
+        // JavaScript to reset the form and display when the reset button is clicked
+        const decryptionForm = document.getElementById('decryption-form');
+        const decryptButton = document.getElementById('decrypt-button');
+        const loadingMessage = document.getElementById('loading-message');
+        const loadingSpinner = document.getElementById('loading-spinner');
+        const decryptedMessage = document.getElementById('decryptedMessage');
+        const resetButton = document.getElementById('reset-button');
+
+        resetButton.addEventListener('click', () => {
+            // Reset the form and hide the loading elements
+            decryptionForm.reset();
+            decryptButton.style.display = 'block';
+            loadingMessage.style.display = 'none';
+            loadingSpinner.style.display = 'none';
+            decryptedMessage.style.display = 'none';
+        });
+
+        decryptionForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // Display loading message and spinner
+            decryptButton.style.display = 'none'; // Hide the decryption button
+            loadingMessage.style.display = 'block';
+            loadingSpinner.style.display = 'block';
+
+            const formData = new FormData(decryptionForm);
+            const response = await fetch('/decrypt_message', {
+                method: 'POST',
+                body: formData,
+            });
+            const message = await response.text();
+
+            // Hide loading message and spinner
+            loadingMessage.style.display = 'none';
+            loadingSpinner.style.display = 'none';
+
+            if (message) {
+                decryptedMessage.value = message;
+                decryptedMessage.style.display = 'block'; // Show the text box
+            }
+        });
+    </script>
+</body>
+</html>
